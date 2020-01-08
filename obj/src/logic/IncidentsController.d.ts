@@ -1,0 +1,37 @@
+import { ConfigParams } from 'pip-services3-commons-node';
+import { IConfigurable } from 'pip-services3-commons-node';
+import { IReferences } from 'pip-services3-commons-node';
+import { IReferenceable } from 'pip-services3-commons-node';
+import { FilterParams } from 'pip-services3-commons-node';
+import { PagingParams } from 'pip-services3-commons-node';
+import { DataPage } from 'pip-services3-commons-node';
+import { IOpenable } from 'pip-services3-commons-node';
+import { ICommandable } from 'pip-services3-commons-node';
+import { CommandSet } from 'pip-services3-commons-node';
+import { IncidentV1 } from '../data/version1/IncidentV1';
+import { IIncidentsController } from './IIncidentsController';
+export declare class IncidentsController implements IConfigurable, IReferenceable, ICommandable, IOpenable, IIncidentsController {
+    private static _defaultConfig;
+    private _logger;
+    private _dependencyResolver;
+    private _persistence;
+    private _commandSet;
+    private _eventsClient;
+    private _expireInterval;
+    private _expireTimeout;
+    private _interval;
+    configure(config: ConfigParams): void;
+    setReferences(references: IReferences): void;
+    getCommandSet(): CommandSet;
+    isOpen(): boolean;
+    open(correlationId: string, callback: (err: any) => void): void;
+    close(correlationId: string, callback: (err: any) => void): void;
+    getIncidents(correlationId: string, filter: FilterParams, paging: PagingParams, callback: (err: any, page: DataPage<IncidentV1>) => void): void;
+    getIncidentsCount(correlationId: string, filter: FilterParams, callback: (err: any, count: number) => void): void;
+    getIncidentById(correlationId: string, id: string, callback: (err: any, incident: IncidentV1) => void): void;
+    private fixIncident;
+    createIncident(correlationId: string, incident: IncidentV1, callback: (err: any, incident: IncidentV1) => void): void;
+    closeIncident(correlationId: string, incidentId: string, user: any, resolutionId: string, resolution: string, callback: (err: any, incident: IncidentV1) => void): void;
+    deleteIncidentById(correlationId: string, id: string, callback: (err: any, incident: IncidentV1) => void): void;
+    deleteExpired(correlationId: string, callback: (err: any) => void): void;
+}

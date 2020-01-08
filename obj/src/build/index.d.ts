@@ -1,0 +1,1 @@
+export { IncidentsServiceFactory } from './IncidentsServiceFactory';
